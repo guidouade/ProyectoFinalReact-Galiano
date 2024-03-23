@@ -7,6 +7,3 @@ Tinta Virtual es una aplicación web que te permite comprar libros más fácilme
 React
 Vite
 Firebase
-
-# Instalación
-
