@@ -5,7 +5,6 @@ import { CardSkeleton } from "../../common/CardSkeleton";
 import "./ItemListContainer.css";
 import { db } from "../../../firebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { ProductCard } from "../../common/ProductCard";
 
 const ItemListContainer = () => {
 
@@ -16,7 +15,6 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     let productsCollection = collection(db, "products");
-    console.log (productsCollection)
 
     let consulta = productsCollection ; // el va saber a quien pedirle los documentos si a todos o a una parte
 
@@ -26,11 +24,7 @@ const ItemListContainer = () => {
         where("category", "==", category)
       );
       consulta = productsCollectionFiltered;
-      console.log (productsCollectionFiltered)
     }
-    console.log (consulta)
-
-
 
     getDocs(consulta)
       .then((res) => {
@@ -46,7 +40,19 @@ const ItemListContainer = () => {
   if (isLoading) {
     return (
       <div className="cards-container">
-        <ProductCard/>
+        {category ? (
+          <>
+            <CardSkeleton />
+            {/* <CardSkeleton /> */}
+          </>
+        ) : (
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+            {/* <CardSkeleton />
+            <CardSkeleton /> */}
+          </>
+        )}
       </div>
     );
   }
